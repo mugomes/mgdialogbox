@@ -28,10 +28,12 @@ type FileDialogOpen struct {
 	lastDir string
 }
 
+var d *FileDialogOpen
+
 var lastDirFile = filepath.Join(os.TempDir(), "mgdialogopenfile_lastdir.txt")
 
 // API EXIGIDA PELO SEU MAIN
-func NewOpenFile(a fyne.App, title string, exts []string, multiselect bool, onSelect func([]string)) *FileDialogOpen {
+func NewOpenFile(a fyne.App, title string, exts []string, multiselect bool, onSelect func([]string)) {
 	dlg := &FileDialogOpen{
 		a:           a,
 		title:       title,
@@ -40,10 +42,11 @@ func NewOpenFile(a fyne.App, title string, exts []string, multiselect bool, onSe
 		onSelect:    onSelect,
 	}
 	dlg.loadLastDir()
-	return dlg
+	
+	dlg.showOpenFile()
 }
 
-func (d *FileDialogOpen) Show() {
+func (d *FileDialogOpen) showOpenFile() {
 	win := d.a.NewWindow(d.title)
 	win.Resize(fyne.NewSize(740, 520))
 	win.CenterOnScreen()
