@@ -10,10 +10,10 @@ import (
 	"github.com/mugomes/mgdialogbox/components"
 )
 
-func NewAlert(a fyne.App, title string, message string, typeError bool, buttonOk string) *components.MessageDialog {
-	return components.NewAlert(a, title, message, typeError, buttonOk)
+func NewAlert(a fyne.App, title string, message string, typeError bool, buttonOk string) {
+	components.NewAlert(a, title, message, typeError, buttonOk)
 }
 
-func NewOpenFile(a fyne.App, title string, exts []string, multiselect bool, onSelect func([]string)) *components.FileDialogOpen {
-	return components.NewOpenFile(a, title, exts, multiselect, onSelect)
+func NewOpenFile(a fyne.App, title string, exts []string, multiselect bool, onSelect func([]string)) {
+	components.NewOpenFile(a, title, exts, multiselect, onSelect)
 }
