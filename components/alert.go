@@ -18,45 +18,26 @@ import (
 	"fyne.io/fyne/v2/widget"
 )
 
-type MessageDialog struct {
-	a         fyne.App
-	title     string
-	message   string
-	typeError bool
-	buttonOk  string
-}
-
 // API EXIGIDA PELO SEU MAIN
-func NewAlert(a fyne.App, title string, message string, typeError bool, buttonOk string) *MessageDialog {
-	dlg := &MessageDialog{
-		a:         a,
-		title:     title,
-		message:   message,
-		typeError: typeError,
-		buttonOk:  buttonOk,
-	}
-	return dlg
-}
-
-func (d *MessageDialog) Show() {
-	win := d.a.NewWindow(d.title)
+func NewAlert(a fyne.App, title string, message string, typeError bool, buttonOk string) {
+	win := a.NewWindow(title)
 	win.Resize(fyne.NewSize(400, 100))
 	win.CenterOnScreen()
 	win.SetFixedSize(true)
 
 	var lblIcon *canvas.Text
 	color := color.Black
-	if d.typeError {
-		lblIcon = canvas.NewText("✅", color)
-	} else {
+	if typeError {
 		lblIcon = canvas.NewText("🛑", color)
+	} else {
+		lblIcon = canvas.NewText("✅", color)
 	}
 	lblIcon.TextSize = 70
 
-	lblMessage := widget.NewLabel(d.message)
+	lblMessage := widget.NewLabel(message)
 	lblMessage.Wrapping = fyne.TextWrapBreak
 
-	btnClose := widget.NewButtonWithIcon(d.buttonOk, theme.ConfirmIcon(), func() {
+	btnClose := widget.NewButtonWithIcon(buttonOk, theme.ConfirmIcon(), func() {
 		win.Close()
 	})
 
@@ -75,4 +56,5 @@ func (d *MessageDialog) Show() {
 	)
 
 	win.Show()
+	
 }
