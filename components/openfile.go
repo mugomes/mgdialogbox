@@ -91,6 +91,7 @@ func (d *FileDialogOpen) showOpenFile() {
 
 		// Abrir diretório
 		if f.IsDir() {
+			search.SetText("")
 			dir = filepath.Join(dir, f.Name())
 			pathLabel.SetText(dir)
 			files = d.listDir(dir)
