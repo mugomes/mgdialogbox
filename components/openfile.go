@@ -6,11 +6,13 @@
 package components
 
 import (
+	"fmt"
 	"io/fs"
 	"os"
 	"path/filepath"
 	"sort"
 	"strings"
+	"time"
 
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
@@ -28,11 +30,8 @@ type FileDialogOpen struct {
 	lastDir string
 }
 
-var d *FileDialogOpen
-
 var lastDirFile = filepath.Join(os.TempDir(), "mgdialogopenfile_lastdir.txt")
 
-// API EXIGIDA PELO SEU MAIN
 func NewOpenFile(a fyne.App, title string, exts []string, multiselect bool, onSelect func([]string)) {
 	dlg := &FileDialogOpen{
 		a:           a,
@@ -42,7 +41,7 @@ func NewOpenFile(a fyne.App, title string, exts []string, multiselect bool, onSe
 		onSelect:    onSelect,
 	}
 	dlg.loadLastDir()
-	
+
 	dlg.showOpenFile()
 }
 
@@ -83,6 +82,12 @@ func (d *FileDialogOpen) showOpenFile() {
 		},
 	)
 
+	var (
+		click int = 1
+		timeClick time.Time
+		durationClick = 500 * time.Millisecond
+	)
+
 	list.OnSelected = func(id widget.ListItemID) {
 		if id < 0 || id >= len(filtered) {
 			return
@@ -91,13 +96,26 @@ func (d *FileDialogOpen) showOpenFile() {
 
 		// Abrir diretório
 		if f.IsDir() {
-			search.SetText("")
-			dir = filepath.Join(dir, f.Name())
-			pathLabel.SetText(dir)
-			files = d.listDir(dir)
-			filtered = d.applyFilter(files, search.Text)
-			selected = map[int]bool{}
-			list.Refresh()
+			list.Unselect(id)
+			click = click + 1
+			now := time.Now()
+			fmt.Println(now.Sub(timeClick))
+			fmt.Println(durationClick)
+			if now.Sub(timeClick) > durationClick {
+				click = 1
+			}
+			timeClick = now
+			if click == 2 {
+				search.SetText("")
+				dir = filepath.Join(dir, f.Name())
+				pathLabel.SetText(dir)
+				files = d.listDir(dir)
+				filtered = d.applyFilter(files, search.Text)
+				selected = map[int]bool{}
+				list.Refresh()
+				click = 1
+			}
+			
 			return
 		}
 
