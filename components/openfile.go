@@ -6,7 +6,6 @@
 package components
 
 import (
-	"fmt"
 	"io/fs"
 	"os"
 	"path/filepath"
@@ -99,8 +98,8 @@ func (d *FileDialogOpen) showOpenFile() {
 			list.Unselect(id)
 			click = click + 1
 			now := time.Now()
-			fmt.Println(now.Sub(timeClick))
-			fmt.Println(durationClick)
+			// fmt.Println(now.Sub(timeClick))
+			// fmt.Println(durationClick)
 			if now.Sub(timeClick) > durationClick {
 				click = 1
 			}
