@@ -6,6 +6,7 @@ MGDialogBox é um componente sofisticado para Fyne que possui diversos tipos de 
 
 - Alert: Para exiber mensagens de sucesso e erro
 - Abrir Arquivo: Um ou mais arquivos
+- Selecionar Diretório: Um ou mais diretórios
 
 ## Instalação
 
@@ -13,17 +14,17 @@ MGDialogBox é um componente sofisticado para Fyne que possui diversos tipos de 
 
 ## Information
 
- - [Page MGDialogBox](https://github.com/mugomes/mgdialogbox)
+ - [Page MGDialogBox](https://www.mugomes.com.br/p/mgdialogbox.html)
 
 ## Requirement
 
- - Go 1.25.3
+ - Go 1.24.6
  - Fyne 2.7.1
 
 ## Support
 
 - GitHub: https://github.com/sponsors/mugomes
-- More: https://mugomes.github.io/apoie.html
+- More: https://www.mugomes.com.br/p/apoie.html
 
 ## License
 

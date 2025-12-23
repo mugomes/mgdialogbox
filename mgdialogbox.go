@@ -1,7 +1,7 @@
 // Copyright (C) 2025 Murilo Gomes Julio
 // SPDX-License-Identifier: MIT
 
-// Site: https://mugomes.github.io
+// Site: https://www.mugomes.com.br
 
 package mgdialogbox
 
@@ -16,6 +16,10 @@ func NewAlert(a fyne.App, title string, message string, typeError bool, buttonOk
 
 func NewOpenFile(a fyne.App, title string, exts []string, multiselect bool, onSelect func([]string)) {
 	components.NewOpenFile(a, title, exts, multiselect, onSelect)
+}
+
+func NewSaveFile(a fyne.App, title string, exts []string, onSelect func(string)) {
+	components.NewSaveFile(a, title, exts, onSelect)
 }
 
 func NewSelectDirectory(a fyne.App, title string, multiselect bool, onSelect func([]string)) {
