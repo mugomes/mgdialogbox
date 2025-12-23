@@ -29,7 +29,7 @@ type FileDialogOpen struct {
 	lastDir string
 }
 
-var lastDirFile = filepath.Join(os.TempDir(), "mgdialogopenfile_lastdir.txt")
+var lastDirFile = filepath.Join(os.TempDir(), "mgdialog_lastdir.txt")
 
 func NewOpenFile(a fyne.App, title string, exts []string, multiselect bool, onSelect func([]string)) {
 	dlg := &FileDialogOpen{
@@ -86,7 +86,7 @@ func (d *FileDialogOpen) showOpenFile() {
 		timeClick time.Time
 		durationClick = 500 * time.Millisecond
 	)
-
+	
 	list.OnSelected = func(id widget.ListItemID) {
 		if id < 0 || id >= len(filtered) {
 			return
@@ -95,11 +95,12 @@ func (d *FileDialogOpen) showOpenFile() {
 
 		// Abrir diretório
 		if f.IsDir() {
+			// Remove a selação
 			list.Unselect(id)
+
+			// Clique duplo
 			click = click + 1
 			now := time.Now()
-			// fmt.Println(now.Sub(timeClick))
-			// fmt.Println(durationClick)
 			if now.Sub(timeClick) > durationClick {
 				click = 1
 			}
@@ -112,7 +113,7 @@ func (d *FileDialogOpen) showOpenFile() {
 				filtered = d.applyFilter(files, search.Text)
 				selected = map[int]bool{}
 				list.Refresh()
-				click = 1
+				click = 1 // reset clique duplo
 			}
 			
 			return
