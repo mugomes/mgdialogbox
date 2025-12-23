@@ -17,3 +17,7 @@ func NewAlert(a fyne.App, title string, message string, typeError bool, buttonOk
 func NewOpenFile(a fyne.App, title string, exts []string, multiselect bool, onSelect func([]string)) {
 	components.NewOpenFile(a, title, exts, multiselect, onSelect)
 }
+
+func NewSelectDirectory(a fyne.App, title string, multiselect bool, onSelect func([]string)) {
+	components.NewSelectDirectory(a, title, multiselect, onSelect)
+}
