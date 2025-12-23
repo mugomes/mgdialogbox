@@ -20,6 +20,7 @@ import (
 	"fyne.io/fyne/v2/theme"
 	"fyne.io/fyne/v2/widget"
 
+	"github.com/mugomes/mgsettings"
 	"github.com/mugomes/mgsmartflow"
 )
 
@@ -32,7 +33,7 @@ type SaveDialogOpen struct {
 	lastDir string
 }
 
-var svLastDirFile = filepath.Join(os.TempDir(), "mgdialog_lastdir.txt")
+var mgconfig = mgsettings.Load("/tmp/mgdialogbox", false)
 
 func NewSaveFile(a fyne.App, title string, exts []string, onSelect func(string)) {
 	dlg := &SaveDialogOpen{
@@ -188,10 +189,7 @@ func (d *SaveDialogOpen) showSaveFile() {
 	win.Show()
 }
 
-//////////////////////////////////////////////////////////////
 // FUNÇÕES AUXILIARES
-//////////////////////////////////////////////////////////////
-
 func (d *SaveDialogOpen) listDir(path string) []fs.FileInfo {
 	entries, _ := os.ReadDir(path)
 
@@ -247,17 +245,16 @@ func (d *SaveDialogOpen) applyFilter(files []fs.FileInfo, query string) []fs.Fil
 	return out
 }
 
-//////////////////////////////////////////////////////////////
 // ÚLTIMO DIRETÓRIO
-//////////////////////////////////////////////////////////////
-
 func (d *SaveDialogOpen) saveLastDir(dir string) {
-	os.WriteFile(svLastDirFile, []byte(dir), 0644)
+	mgconfig.Set("lastdir", dir)
+	mgconfig.Save()
 }
 
 func (d *SaveDialogOpen) svLoadLastDir() {
-	b, err := os.ReadFile(svLastDirFile)
-	if err == nil {
-		d.lastDir = strings.TrimSpace(string(b))
+	lastDir := mgconfig.Get("lastdir", nil)
+
+	if lastDir != nil {
+		d.lastDir = strings.TrimSpace(lastDir.(string))
 	}
 }
