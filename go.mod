@@ -2,7 +2,10 @@ module github.com/mugomes/mgdialogbox
 
 go 1.24.6
 
-require fyne.io/fyne/v2 v2.7.1
+require (
+	fyne.io/fyne/v2 v2.7.1
+	github.com/mugomes/mgsmartflow v1.0.1
+)
 
 require (
 	github.com/fredbi/uri v1.1.1 // indirect
