@@ -6,6 +6,7 @@
 package components
 
 import (
+	"fmt"
 	"io/fs"
 	"os"
 	"path"
@@ -23,10 +24,10 @@ import (
 )
 
 type SaveDialogOpen struct {
-	a           fyne.App
-	title       string
-	exts        []string
-	onSelect    func(string)
+	a        fyne.App
+	title    string
+	exts     []string
+	onSelect func(string)
 
 	lastDir string
 }
@@ -35,10 +36,10 @@ var svLastDirFile = filepath.Join(os.TempDir(), "mgdialog_lastdir.txt")
 
 func NewSaveFile(a fyne.App, title string, exts []string, onSelect func(string)) {
 	dlg := &SaveDialogOpen{
-		a:           a,
-		title:       title,
-		exts:        exts,
-		onSelect:    onSelect,
+		a:        a,
+		title:    title,
+		exts:     exts,
+		onSelect: onSelect,
 	}
 	dlg.svLoadLastDir()
 	dlg.showSaveFile()
@@ -64,6 +65,8 @@ func (d *SaveDialogOpen) showSaveFile() {
 	filtered := files
 	selected := map[int]bool{}
 
+	txtFilename := widget.NewEntry()
+	txtFilename.Resize(fyne.NewSize(400, 38))
 	list := widget.NewList(
 		func() int { return len(filtered) },
 		func() fyne.CanvasObject { return widget.NewLabel("") },
@@ -73,6 +76,7 @@ func (d *SaveDialogOpen) showSaveFile() {
 
 			if selected[id] {
 				o.(*widget.Label).SetText("✔ " + name)
+				txtFilename.SetText(name)
 			} else {
 				if row.IsDir() {
 					o.(*widget.Label).SetText("📁 " + name)
@@ -84,11 +88,11 @@ func (d *SaveDialogOpen) showSaveFile() {
 	)
 
 	var (
-		click int = 1
-		timeClick time.Time
+		click         int = 1
+		timeClick     time.Time
 		durationClick = 500 * time.Millisecond
 	)
-	
+
 	list.OnSelected = func(id widget.ListItemID) {
 		if id < 0 || id >= len(filtered) {
 			return
@@ -117,7 +121,7 @@ func (d *SaveDialogOpen) showSaveFile() {
 				list.Refresh()
 				click = 1 // reset clique duplo
 			}
-			
+
 			return
 		}
 
@@ -125,13 +129,12 @@ func (d *SaveDialogOpen) showSaveFile() {
 		if f.IsDir() {
 			// apenas destaca a pasta
 			selected = map[int]bool{id: true}
-		} // } else {
-		// 	if d.multiSelect {
-		// 		selected[id] = !selected[id]
-		// 	} else {
-		// 		selected = map[int]bool{id: true}
-		// 	}
-		// }
+		} else {
+			for k := range selected {
+				delete(selected, k)
+			}
+			selected[id] = !selected[id]
+		}
 
 		list.Refresh()
 	}
@@ -150,12 +153,15 @@ func (d *SaveDialogOpen) showSaveFile() {
 	})
 
 	// BOTÃO ABRIR
-	txtFilename := widget.NewEntry()
-	txtFilename.Resize(fyne.NewSize(400, 38))
 	btnSave := widget.NewButtonWithIcon("Salvar", theme.ConfirmIcon(), func() {
 		if len(txtFilename.Text) > 0 {
+			filename := txtFilename.Text
+			if len(d.exts) > 0 && !strings.Contains(filename, ".") {
+				filename = fmt.Sprintf("%s%s", filename, d.exts[0])
+			}
+
 			d.saveLastDir(dir)
-			d.onSelect(path.Join(dir, txtFilename.Text))
+			d.onSelect(path.Join(dir, filename))
 			win.Close()
 		}
 	})
@@ -171,7 +177,7 @@ func (d *SaveDialogOpen) showSaveFile() {
 	flow.AddColumn(btnBack, container.NewVBox(pathLabel, search))
 	flow.SetResize(btnBack, fyne.NewSize(68, 79))
 	flow.AddRow(list)
-	flow.SetResize(list, fyne.NewSize(win.Canvas().Size().Width, win.Canvas().Size().Height - 154))
+	flow.SetResize(list, fyne.NewSize(win.Canvas().Size().Width, win.Canvas().Size().Height-154))
 	flow.AddColumn(
 		txtFilename, btnSave,
 	)
