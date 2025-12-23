@@ -20,6 +20,7 @@ import (
 	"fyne.io/fyne/v2/theme"
 	"fyne.io/fyne/v2/widget"
 
+	"github.com/mugomes/mgdialogbox/controls"
 	"github.com/mugomes/mgsettings"
 	"github.com/mugomes/mgsmartflow"
 )
@@ -177,14 +178,20 @@ func (d *SaveDialogOpen) showSaveFile() {
 	// LAYOUT
 	flow.AddColumn(btnBack, container.NewVBox(pathLabel, search))
 	flow.SetResize(btnBack, fyne.NewSize(68, 79))
+
 	flow.AddRow(list)
-	flow.SetResize(list, fyne.NewSize(win.Canvas().Size().Width, win.Canvas().Size().Height-154))
+
 	flow.AddColumn(
 		txtFilename, btnSave,
 	)
 	flow.SetResize(btnSave, fyne.NewSize(100, 38))
 
-	win.SetContent(flow.Container)
+	controls.OnResize(win, func(size fyne.Size) {
+		//fmt.Printf("resize: %.0fx%.0f\n", size.Width, size.Height)
+		flow.SetResize(list, fyne.NewSize(size.Width, size.Height-137))
+	})
+
+	win.Canvas().Overlays().Add(flow.Container)
 
 	win.Show()
 }
