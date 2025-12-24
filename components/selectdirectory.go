@@ -17,6 +17,9 @@ import (
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/theme"
 	"fyne.io/fyne/v2/widget"
+
+	"github.com/mugomes/mgdialogbox/controls"
+	"github.com/mugomes/mgsmartflow"
 )
 
 type DialogSelectDirectory struct {
@@ -164,22 +167,20 @@ func (d *DialogSelectDirectory) sdShowSelectDirectory() {
 		list.Refresh()
 	}
 
+	flow := mgsmartflow.New()
+
 	// LAYOUT
-	top := container.NewBorder(nil, nil, btnBack, nil,
-		container.NewVBox(pathLabel, search),
-	)
+	flow.AddColumn(btnBack, container.NewVBox(pathLabel, search))
+	flow.SetResize(btnBack, fyne.NewSize(68, 79))
 
-	bottom := container.NewHBox(btnSelect)
+	flow.AddRow(list)
+	flow.AddRow(btnSelect)
 
-	win.SetContent(
-		container.NewBorder(
-			top,
-			bottom,
-			nil, nil,
-			list,
-		),
-	)
+	controls.OnResize(win, func(size fyne.Size) {
+		flow.SetResize(list, fyne.NewSize(size.Width, size.Height-137))
+	})
 
+	win.Canvas().Overlays().Add(flow.Container)
 	win.Show()
 }
 

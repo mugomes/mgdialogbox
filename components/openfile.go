@@ -17,6 +17,9 @@ import (
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/theme"
 	"fyne.io/fyne/v2/widget"
+
+	"github.com/mugomes/mgdialogbox/controls"
+	"github.com/mugomes/mgsmartflow"
 )
 
 type FileDialogOpen struct {
@@ -48,6 +51,8 @@ func (d *FileDialogOpen) showOpenFile() {
 	win := d.a.NewWindow(d.title)
 	win.Resize(fyne.NewSize(740, 520))
 	win.CenterOnScreen()
+
+	flow := mgsmartflow.New()
 
 	dir := d.lastDir
 	if dir == "" {
@@ -180,20 +185,17 @@ func (d *FileDialogOpen) showOpenFile() {
 	}
 
 	// LAYOUT
-	top := container.NewBorder(nil, nil, btnBack, nil,
-		container.NewVBox(pathLabel, search),
-	)
+	flow.AddColumn(btnBack, container.NewVBox(pathLabel, search))
+	flow.SetResize(btnBack, fyne.NewSize(68, 79))
 
-	bottom := container.NewHBox(btnOpen)
+	flow.AddRow(list)
+	flow.AddRow(btnOpen)
 
-	win.SetContent(
-		container.NewBorder(
-			top,
-			bottom,
-			nil, nil,
-			list,
-		),
-	)
+	controls.OnResize(win, func(size fyne.Size) {
+		flow.SetResize(list, fyne.NewSize(size.Width, size.Height-137))
+	})
+
+	win.Canvas().Overlays().Add(flow.Container)
 
 	win.Show()
 }
