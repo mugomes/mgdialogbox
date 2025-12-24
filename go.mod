@@ -4,7 +4,7 @@ go 1.24.6
 
 require (
 	fyne.io/fyne/v2 v2.7.1
-	github.com/mugomes/mgsettings v1.0.0
+	github.com/mugomes/mgsettings/v2 v2.1.1
 	github.com/mugomes/mgsmartflow v1.0.1
 )
 

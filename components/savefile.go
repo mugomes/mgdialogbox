@@ -21,7 +21,7 @@ import (
 	"fyne.io/fyne/v2/widget"
 
 	"github.com/mugomes/mgdialogbox/controls"
-	"github.com/mugomes/mgsettings"
+	"github.com/mugomes/mgsettings/v2"
 	"github.com/mugomes/mgsmartflow"
 )
 
