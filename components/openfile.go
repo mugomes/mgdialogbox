@@ -20,7 +20,7 @@ import (
 
 	"github.com/mugomes/mgdialogbox/controls"
 	"github.com/mugomes/mgsmartflow"
-	"github.com/mugomes/mgsettings/v2"
+	"github.com/mugomes/mgsettings/v3"
 )
 
 type FileDialogOpen struct {
@@ -33,7 +33,7 @@ type FileDialogOpen struct {
 	lastDir string
 }
 
-var openFileMGconfig = mgsettings.Load("/tmp/mgdialogbox", false)
+var openFileMGconfig, _ = mgsettings.Load("/tmp/mgdialogbox", false)
 
 func NewOpenFile(a fyne.App, title string, exts []string, multiselect bool, onSelect func([]string)) {
 	dlg := &FileDialogOpen{
@@ -265,14 +265,14 @@ func (d *FileDialogOpen) applyFilter(files []fs.FileInfo, query string) []fs.Fil
 //////////////////////////////////////////////////////////////
 
 func (d *FileDialogOpen) saveLastDir(dir string) {
-	openFileMGconfig.Set("lastdir", dir)
+	openFileMGconfig.SetString("lastdir", dir)
 	openFileMGconfig.Save()
 }
 
 func (d *FileDialogOpen) loadLastDir() {
-	lastDir := openFileMGconfig.Get("lastdir", nil)
+	lastDir := openFileMGconfig.GetString("lastdir", "")
 
-	if lastDir != nil {
-		d.lastDir = strings.TrimSpace(lastDir.(string))
+	if lastDir != "" {
+		d.lastDir = strings.TrimSpace(lastDir)
 	}
 }
