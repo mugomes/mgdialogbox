@@ -1,7 +1,7 @@
-// Copyright (C) 2025 Murilo Gomes Julio
+// Copyright (C) 2025-2026 Murilo Gomes Julio
 // SPDX-License-Identifier: MIT
 
-// Site: https://www.mugomes.com.br
+// Site: https://mugomes.github.io
 
 package controls
 
@@ -10,36 +10,6 @@ import (
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/layout"
 )
-
-// type WindowResizeObserver struct {
-// 	last     fyne.Size
-// 	OnChange func(size fyne.Size)
-// }
-
-// func NewWindowResizeObserver(onChange func(size fyne.Size), objects ...fyne.CanvasObject) *fyne.Container {
-// 	obs := &WindowResizeObserver{
-// 		OnChange: onChange,
-// 	}
-// 	return container.New(obs, objects...)
-// }
-
-// func (o *WindowResizeObserver) Layout(objects []fyne.CanvasObject, size fyne.Size) {
-// 	if size != o.last {
-// 		o.last = size
-// 		if o.OnChange != nil {
-// 			o.OnChange(size)
-// 		}
-// 	}
-
-// 	for _, obj := range objects {
-// 		obj.Resize(obj.Size())
-// 		obj.Move(obj.Position())
-// 	}
-// }
-
-// func (o *WindowResizeObserver) MinSize(objects []fyne.CanvasObject) fyne.Size {
-// 	return fyne.NewSize(1, 1)
-// }
 
 type resizableLayout struct {
 	last     fyne.Size
