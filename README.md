@@ -1,34 +1,135 @@
 # MGDialogBox
 
-MGDialogBox é um componente sofisticado para Fyne que possui diversos tipos de caixa de dialogo diferentes.
+MGDialogBox é uma biblioteca em Go baseada no **Fyne** que fornece **caixas de diálogo prontas e reutilizáveis** para aplicações desktop, como alertas, confirmações e seleção de arquivos ou diretórios.
 
-## Recursos
+O objetivo é simplificar a criação de diálogos comuns, mantendo uma API limpa, consistente e fácil de integrar.
 
-- Alert: Para exiber mensagens de sucesso e erro
-- Abrir Arquivo: Um ou mais arquivos
-- Selecionar Diretório: Um ou mais diretórios
+---
 
-## Instalação
+## ✨ Recursos
 
-`go get github.com/mugomes/mgdialogbox`
+* Alertas simples (informação/erro)
+* Caixa de confirmação com múltiplos botões
+* Abertura de arquivos (com filtro de extensões)
+* Salvamento de arquivos
+* Seleção de diretórios
+* Suporte a seleção múltipla
+* Callbacks para retorno de ações do usuário
 
-## Information
+---
 
- - [Page MGDialogBox](https://www.mugomes.com.br/p/mgdialogbox.html)
+## 📦 Instalação
 
-## Requirement
+```bash
+go get github.com/mugomes/mgdialogbox
+```
 
- - Go 1.24.6
- - Fyne 2.7.1
+---
 
-## Support
+## 🚀 Uso
 
-- GitHub: https://github.com/sponsors/mugomes
-- More: https://www.mugomes.com.br/p/apoie.html
+### 🔔 Alerta
+
+```go
+mgdialogbox.NewAlert(
+	app,
+	"Aviso",
+	"Operação concluída com sucesso",
+	false,
+	"OK",
+)
+```
+
+---
+
+### ❓ Confirmação com múltiplos botões
+
+```go
+mgdialogbox.NewConfirm(
+	app,
+	"Confirmação",
+	"Deseja continuar?",
+	[]string{"Sim", "Não", "Cancelar"},
+	func(result int) {
+		// result começa em 0 (Sim = 0, Não = 1, Cancelar = 2)
+	},
+)
+```
+
+---
+
+### 📂 Abrir arquivo
+
+```go
+mgdialogbox.NewOpenFile(
+	app,
+	"Abrir Arquivo",
+	[]string{"png", "jpg", "pdf"},
+	false,
+	func(files []string) {
+		// arquivos selecionados
+	},
+)
+```
+
+---
+
+### 💾 Salvar arquivo
+
+```go
+mgdialogbox.NewSaveFile(
+	app,
+	"Salvar Arquivo",
+	[]string{"txt", "md"},
+	func(path string) {
+		// caminho escolhido
+	},
+)
+```
+
+---
+
+### 📁 Selecionar diretório
+
+```go
+mgdialogbox.NewSelectDirectory(
+	app,
+	"Selecionar Pasta",
+	true,
+	func(paths []string) {
+		// diretórios selecionados
+	},
+)
+```
+
+---
+
+## 🧱 Estrutura
+
+O pacote principal atua como **facade**, delegando a lógica de UI para o pacote interno `components`, facilitando manutenção e extensões futuras.
+
+---
+
+## 🖥️ Requisitos
+
+* Go 1.25.5+
+* Fyne 2.7.1+
+
+---
+
+## 👤 Autor
+
+**Murilo Gomes Julio**
+
+🔗 [https://mugomes.github.io](https://mugomes.github.io)
+
+📺 [https://youtube.com/@mugomesoficial](https://youtube.com/@mugomesoficial)
+
+---
 
 ## License
 
-Copyright (c) 2025 Murilo Gomes Julio
+Copyright (c) 2025-2026 Murilo Gomes Julio
 
 Licensed under the [MIT](https://github.com/mugomes/mgdialogbox/blob/main/LICENSE) license.
 
