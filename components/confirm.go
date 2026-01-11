@@ -13,6 +13,8 @@ import (
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/layout"
 	"fyne.io/fyne/v2/widget"
+
+	"github.com/mugomes/mgsmartflow"
 )
 
 func NewConfirm(a fyne.App, title, message string, buttons []string, OnResult func(int)) {
@@ -21,13 +23,19 @@ func NewConfirm(a fyne.App, title, message string, buttons []string, OnResult fu
 	win.CenterOnScreen()
 	win.SetFixedSize(true)
 
+	flow := mgsmartflow.New()
+
 	var lblIcon *canvas.Text
 	color := color.Black
 	lblIcon = canvas.NewText("💬", color)
 	lblIcon.TextSize = 70
 
 	lblMessage := widget.NewLabel(message)
-	lblMessage.Wrapping = fyne.TextWrapBreak
+	lblMessage.Wrapping = fyne.TextWrapWord
+
+	flow.AddColumn(lblIcon, lblMessage)
+	flow.SetResize(lblIcon, fyne.NewSize(79, lblIcon.MinSize().Height))
+	flow.SetMove(lblIcon, fyne.NewPos(12,7))
 
 	var btns []fyne.CanvasObject
 	for i, btn := range buttons {
@@ -39,19 +47,8 @@ func NewConfirm(a fyne.App, title, message string, buttons []string, OnResult fu
 		btns = append(btns, nBtn)
 	}
 
-	top := container.NewBorder(nil, nil, lblIcon, nil,
-		container.NewVBox(lblMessage),
-	)
+	flow.AddRow(container.NewHBox(layout.NewSpacer(), container.NewHBox(btns...), layout.NewSpacer()))
 
-	bottom := container.NewHBox(layout.NewSpacer(), container.NewHBox(btns...), layout.NewSpacer())
-
-	win.SetContent(
-		container.NewBorder(
-			top,
-			bottom,
-			nil, nil, nil,
-		),
-	)
-
+	win.SetContent(flow.Container)
 	win.Show()
 }

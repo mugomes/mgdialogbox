@@ -14,6 +14,8 @@ import (
 	"fyne.io/fyne/v2/layout"
 	"fyne.io/fyne/v2/theme"
 	"fyne.io/fyne/v2/widget"
+
+	"github.com/mugomes/mgsmartflow"
 )
 
 func NewAlert(a fyne.App, title string, message string, typeError bool, buttonOk string) {
@@ -21,6 +23,8 @@ func NewAlert(a fyne.App, title string, message string, typeError bool, buttonOk
 	win.Resize(fyne.NewSize(400, 100))
 	win.CenterOnScreen()
 	win.SetFixedSize(true)
+
+	flow := mgsmartflow.New()
 
 	var lblIcon *canvas.Text
 	color := color.Black
@@ -32,25 +36,18 @@ func NewAlert(a fyne.App, title string, message string, typeError bool, buttonOk
 	lblIcon.TextSize = 70
 
 	lblMessage := widget.NewLabel(message)
-	lblMessage.Wrapping = fyne.TextWrapBreak
+	lblMessage.Wrapping = fyne.TextWrapWord
+
+	flow.AddColumn(lblIcon, lblMessage)
+	flow.SetResize(lblIcon, fyne.NewSize(79, lblIcon.MinSize().Height))
+	flow.SetMove(lblIcon, fyne.NewPos(12, 7))
 
 	btnClose := widget.NewButtonWithIcon(buttonOk, theme.ConfirmIcon(), func() {
 		win.Close()
 	})
 
-	top := container.NewBorder(nil, nil, lblIcon, nil,
-		container.NewVBox(lblMessage),
-	)
+	flow.AddRow(container.NewHBox(layout.NewSpacer(), btnClose, layout.NewSpacer()))
 
-	bottom := container.NewHBox(layout.NewSpacer(), btnClose, layout.NewSpacer())
-
-	win.SetContent(
-		container.NewBorder(
-			top,
-			bottom,
-			nil, nil, nil,
-		),
-	)
-
+	win.SetContent(flow.Container)
 	win.Show()
 }
