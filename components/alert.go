@@ -39,7 +39,7 @@ func NewAlert(a fyne.App, title string, message string, typeError bool, buttonOk
 	lblMessage.Wrapping = fyne.TextWrapWord
 
 	flow.AddColumn(lblIcon, lblMessage)
-	flow.SetResize(lblIcon, fyne.NewSize(79, lblIcon.MinSize().Height))
+	flow.SetResize(lblIcon, fyne.NewSize(79, lblIcon.MinSize().Height + 57))
 	flow.SetMove(lblIcon, fyne.NewPos(12, 7))
 
 	btnClose := widget.NewButtonWithIcon(buttonOk, theme.ConfirmIcon(), func() {
