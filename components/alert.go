@@ -1,13 +1,11 @@
-// Copyright (C) 2025 Murilo Gomes Julio
+// Copyright (C) 2025-2026 Murilo Gomes Julio
 // SPDX-License-Identifier: MIT
 
-// Site: https://www.mugomes.com.br
+// Site: https://mugomes.github.io
 
 package components
 
 import (
-	//"image/color"
-
 	"image/color"
 
 	"fyne.io/fyne/v2"
@@ -18,7 +16,6 @@ import (
 	"fyne.io/fyne/v2/widget"
 )
 
-// API EXIGIDA PELO SEU MAIN
 func NewAlert(a fyne.App, title string, message string, typeError bool, buttonOk string) {
 	win := a.NewWindow(title)
 	win.Resize(fyne.NewSize(400, 100))
@@ -56,5 +53,4 @@ func NewAlert(a fyne.App, title string, message string, typeError bool, buttonOk
 	)
 
 	win.Show()
-	
 }
