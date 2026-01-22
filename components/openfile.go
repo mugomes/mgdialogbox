@@ -19,8 +19,8 @@ import (
 	"fyne.io/fyne/v2/widget"
 
 	"github.com/mugomes/mgdialogbox/controls"
-	"github.com/mugomes/mgsmartflow"
 	"github.com/mugomes/mgsettings/v3"
+	"github.com/mugomes/mgsmartflow"
 )
 
 type FileDialogOpen struct {
@@ -44,7 +44,6 @@ func NewOpenFile(a fyne.App, title string, exts []string, multiselect bool, onSe
 		onSelect:    onSelect,
 	}
 	dlg.loadLastDir()
-
 	dlg.showOpenFile()
 }
 
@@ -88,11 +87,11 @@ func (d *FileDialogOpen) showOpenFile() {
 	)
 
 	var (
-		click int = 1
-		timeClick time.Time
-		durationClick = 500 * time.Millisecond
+		click         int = 1
+		timeClick     time.Time
+		durationClick = 400 * time.Millisecond
 	)
-	
+
 	list.OnSelected = func(id widget.ListItemID) {
 		if id < 0 || id >= len(filtered) {
 			return
@@ -121,7 +120,7 @@ func (d *FileDialogOpen) showOpenFile() {
 				list.Refresh()
 				click = 1 // reset clique duplo
 			}
-			
+
 			return
 		}
 
@@ -141,9 +140,15 @@ func (d *FileDialogOpen) showOpenFile() {
 			if d.multiSelect {
 				selected[id] = !selected[id]
 			} else {
+				for k := range selected {
+					delete(selected, k)
+				}
 				selected = map[int]bool{id: true}
 			}
 		}
+
+		// Remover a seleção ao clicar novamente
+		list.Unselect(id)
 
 		list.Refresh()
 	}
