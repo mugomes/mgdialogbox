@@ -237,12 +237,12 @@ func (d *DialogSelectDirectory) sdApplyFilter(files []fs.FileInfo, query string)
 //////////////////////////////////////////////////////////////
 
 func (d *DialogSelectDirectory) sdSaveLastDir(dir string) {
-	openFileMGconfig.SetString("lastdir", dir)
-	openFileMGconfig.Save()
+	selectDirectoryMGconfig.SetString("lastdir", dir)
+	selectDirectoryMGconfig.Save()
 }
 
 func (d *DialogSelectDirectory) sdLoadLastDir() {
-	lastDir := openFileMGconfig.GetString("lastdir", "")
+	lastDir := selectDirectoryMGconfig.GetString("lastdir", "")
 
 	if lastDir != "" {
 		d.lastDir = strings.TrimSpace(lastDir)
