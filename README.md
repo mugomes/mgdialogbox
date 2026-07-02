@@ -1,7 +1,9 @@
 # MGDialogBox
 
-> [!NOTE]
-> This repository has been migrated to Codeberg, please see: https://codeberg.org/bluice/mgdialogbox
+<!-- Badge opcional para deixar claro visualmente -->
+![Status](https://img.shields.io/badge/status-arquivado--archived-red.svg)
+
+> **Aviso importante:** Esta biblioteca foi **oficialmente arquivada** e não receberá mais atualizações, correções de bugs ou suporte para novas versões.
 
 MGDialogBox é uma biblioteca em Go baseada no **Fyne** que fornece **caixas de diálogo prontas e reutilizáveis** para aplicações desktop, como alertas, confirmações e seleção de arquivos ou diretórios.
 
