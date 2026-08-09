@@ -1,7 +1,7 @@
-// Copyright (C) 2025-2026 Murilo Gomes Julio
-// SPDX-License-Identifier: MIT
+// Required Notice: Copyright (c) 2025-2026 Murilo Gomes Julio. All Rights Reserved. (https://profmugomes.com.br)
 
-// Site: https://mugomes.github.io
+// Licensed under the PolyForm Perimeter License 1.0.1.
+// See LICENSE.md for details.
 
 package components
 
@@ -20,9 +20,9 @@ import (
 	"fyne.io/fyne/v2/theme"
 	"fyne.io/fyne/v2/widget"
 
-	"github.com/mugomes/mgdialogbox/controls"
-	"github.com/mugomes/mgsettings/v3"
-	"github.com/mugomes/mgsmartflow"
+	"github.com/profmugomes/mgdialogbox/v2/controls"
+	"github.com/profmugomes/mgsettings/v4"
+	"github.com/profmugomes/mgsmartflow/v2"
 )
 
 type SaveDialogOpen struct {
@@ -177,18 +177,18 @@ func (d *SaveDialogOpen) showSaveFile() {
 
 	// LAYOUT
 	flow.AddColumn(btnBack, container.NewVBox(pathLabel, search))
-	flow.SetResize(btnBack, fyne.NewSize(68, 79))
+	flow.Resize(btnBack, 68, 79)
 
 	flow.AddRow(list)
 
 	flow.AddColumn(
 		txtFilename, btnSave,
 	)
-	flow.SetResize(btnSave, fyne.NewSize(100, 38))
+	flow.Resize(btnSave, 100, 38)
 
 	controls.OnResize(win, func(size fyne.Size) {
 		//fmt.Printf("resize: %.0fx%.0f\n", size.Width, size.Height)
-		flow.SetResize(list, fyne.NewSize(size.Width, size.Height-137))
+		flow.Resize(list, size.Width, size.Height-137)
 	})
 
 	win.Canvas().Overlays().Add(flow.Container)

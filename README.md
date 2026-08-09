@@ -1,9 +1,6 @@
 # MGDialogBox
 
-<!-- Badge opcional para deixar claro visualmente -->
-![Status](https://img.shields.io/badge/status-arquivado--archived-red.svg)
-
-> **Aviso importante:** Esta biblioteca foi **oficialmente arquivada** e não receberá mais atualizações, correções de bugs ou suporte para novas versões.
+[![License](https://img.shields.io/badge/license-PolyForm%20Perimeter%201.0.1-5351FB)](LICENSE.md)
 
 MGDialogBox é uma biblioteca em Go baseada no **Fyne** que fornece **caixas de diálogo prontas e reutilizáveis** para aplicações desktop, como alertas, confirmações e seleção de arquivos ou diretórios.
 
@@ -26,7 +23,7 @@ O objetivo é simplificar a criação de diálogos comuns, mantendo uma API limp
 ## 📦 Instalação
 
 ```bash
-go get github.com/mugomes/mgdialogbox
+go get github.com/profmugomes/mgdialogbox
 ```
 
 ---
@@ -42,6 +39,17 @@ mgdialogbox.NewAlert(
 	"Operação concluída com sucesso",
 	false,
 	"OK",
+)
+
+mgdialogbox.NewAlert(
+	app,
+	"Aviso",
+	"Operação concluída com sucesso",
+	false,
+	"OK",
+	func() {
+		// Ação que deseja realizar após o fechamento do alerta
+	},
 )
 ```
 
@@ -115,10 +123,10 @@ O pacote principal atua como **facade**, delegando a lógica de UI para o pacote
 
 ---
 
-## 🖥️ Requisitos
+## 🧩 Compatibilidade
 
-* Go 1.25.5+
-* Fyne 2.7.1+
+* Go 1.26.5+
+* Fyne 2.8.0
 
 ---
 
@@ -126,16 +134,34 @@ O pacote principal atua como **facade**, delegando a lógica de UI para o pacote
 
 **Murilo Gomes Julio**
 
-🔗 [https://mugomes.github.io](https://mugomes.github.io)
+🔗 [https://www.profmugomes.com.br](https://www.profmugomes.com.br)
 
-📺 [https://youtube.com/@mugomesoficial](https://youtube.com/@mugomesoficial)
+📺 [https://youtube.com/@profmugomes](https://youtube.com/@profmugomes)
 
 ---
 
 ## License
 
-Copyright (c) 2025-2026 Murilo Gomes Julio
+Copyright (c) 2025-2026 Murilo Gomes Julio. All Rights Reserved.
 
-Licensed under the [MIT](https://github.com/mugomes/mgdialogbox/blob/main/LICENSE) license.
+This project is licensed under the PolyForm Perimeter License 1.0.1.
 
-All contributions to the MGDialogBox are subject to this license.
+### Summary
+
+This software is available for commercial and noncommercial use, subject to the terms of the PolyForm Perimeter License 1.0.1.
+
+You may:
+
+* ✔ Use the software for commercial and noncommercial purposes.
+* ✔ Inspect and study the source code.
+* ✔ Modify the software.
+* ✔ Create derivative works based on the software.
+* ✔ Redistribute the software and permitted modifications.
+
+You may not:
+
+* ✖ Provide a product that competes with the software.
+
+See the full license terms at LICENSE.md.
+
+This summary is provided for convenience only and does not replace or modify the full license terms.
