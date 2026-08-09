@@ -1,7 +1,7 @@
-// Copyright (C) 2025-2026 Murilo Gomes Julio
-// SPDX-License-Identifier: MIT
+// Required Notice: Copyright (c) 2025-2026 Murilo Gomes Julio. All Rights Reserved. (https://profmugomes.com.br)
 
-// Site: https://mugomes.github.io
+// Licensed under the PolyForm Perimeter License 1.0.1.
+// See LICENSE.md for details.
 
 package components
 
@@ -15,10 +15,10 @@ import (
 	"fyne.io/fyne/v2/theme"
 	"fyne.io/fyne/v2/widget"
 
-	"github.com/mugomes/mgsmartflow"
+	"github.com/profmugomes/mgsmartflow/v2"
 )
 
-func NewAlert(a fyne.App, title string, message string, typeError bool, buttonOk string) {
+func NewAlert(a fyne.App, title string, message string, typeError bool, buttonOk string, onClosed func()) {
 	win := a.NewWindow(title)
 	win.Resize(fyne.NewSize(400, 100))
 	win.CenterOnScreen()
@@ -39,11 +39,15 @@ func NewAlert(a fyne.App, title string, message string, typeError bool, buttonOk
 	lblMessage.Wrapping = fyne.TextWrapWord
 
 	flow.AddColumn(lblIcon, lblMessage)
-	flow.SetResize(lblIcon, fyne.NewSize(79, lblIcon.MinSize().Height + 57))
-	flow.SetMove(lblIcon, fyne.NewPos(12, 7))
+	flow.Resize(lblIcon, 79, lblIcon.MinSize().Height + 57)
+	flow.Move(lblIcon, 12, 7)
 
 	btnClose := widget.NewButtonWithIcon(buttonOk, theme.ConfirmIcon(), func() {
 		win.Close()
+
+		if onClosed != nil {
+			onClosed()
+		}
 	})
 
 	flow.AddRow(container.NewHBox(layout.NewSpacer(), btnClose, layout.NewSpacer()))
