@@ -1,4 +1,4 @@
-// Required Notice: Copyright (c) 2025-2026 Murilo Gomes Julio. All Rights Reserved. (https://profmugomes.com.br)
+// Required Notice: Copyright (c) 2025-2026 Murilo Gomes <profmugomes.com.br>. All Rights Reserved. (https://profmugomes.com.br)
 
 // Licensed under the PolyForm Perimeter License 1.0.1.
 // See LICENSE.md for details.
@@ -18,9 +18,9 @@ import (
 	"fyne.io/fyne/v2/theme"
 	"fyne.io/fyne/v2/widget"
 
-	"github.com/profmugomes/mgdialogbox/v2/controls"
-	"github.com/profmugomes/mgsettings/v4"
-	"github.com/profmugomes/mgsmartflow/v2"
+	"github.com/mugomes/mgdialogbox/v2/controls"
+	"github.com/mugomes/mgsettings/v4"
+	"github.com/mugomes/mgsmartflow/v2"
 )
 
 type DialogSelectDirectory struct {

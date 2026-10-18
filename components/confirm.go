@@ -1,4 +1,4 @@
-// Required Notice: Copyright (c) 2025-2026 Murilo Gomes Julio. All Rights Reserved. (https://profmugomes.com.br)
+// Required Notice: Copyright (c) 2025-2026 Murilo Gomes <profmugomes.com.br>. All Rights Reserved. (https://profmugomes.com.br)
 
 // Licensed under the PolyForm Perimeter License 1.0.1.
 // See LICENSE.md for details.
@@ -14,7 +14,7 @@ import (
 	"fyne.io/fyne/v2/layout"
 	"fyne.io/fyne/v2/widget"
 
-	"github.com/profmugomes/mgsmartflow/v2"
+	"github.com/mugomes/mgsmartflow/v2"
 )
 
 func NewConfirm(a fyne.App, title, message string, buttons []string, OnResult func(int)) {
@@ -34,8 +34,8 @@ func NewConfirm(a fyne.App, title, message string, buttons []string, OnResult fu
 	lblMessage.Wrapping = fyne.TextWrapWord
 
 	flow.AddColumn(lblIcon, lblMessage)
-	flow.Resize(lblIcon, 79, lblIcon.MinSize().Height + 57)
-	flow.Move(lblIcon, 12,7)
+	flow.Resize(lblIcon, 79, lblIcon.MinSize().Height+57)
+	flow.Move(lblIcon, 12, 7)
 
 	var btns []fyne.CanvasObject
 	for i, btn := range buttons {
