@@ -23,7 +23,7 @@ O objetivo é simplificar a criação de diálogos comuns, mantendo uma API limp
 ## 📦 Instalação
 
 ```bash
-go get github.com/profmugomes/mgdialogbox
+go get github.com/mugomes/mgdialogbox
 ```
 
 ---
@@ -125,14 +125,14 @@ O pacote principal atua como **facade**, delegando a lógica de UI para o pacote
 
 ## 🧩 Compatibilidade
 
-* Go 1.26.5+
+* Go 1.27.2+
 * Fyne 2.8.0
 
 ---
 
 ## 👤 Autor
 
-**Murilo Gomes Julio**
+**Murilo Gomes**
 
 🔗 [https://www.profmugomes.com.br](https://www.profmugomes.com.br)
 
@@ -142,9 +142,7 @@ O pacote principal atua como **facade**, delegando a lógica de UI para o pacote
 
 ## License
 
-Copyright (c) 2025-2026 Murilo Gomes Julio. All Rights Reserved.
-
-This project is licensed under the PolyForm Perimeter License 1.0.1.
+Copyright (c) 2025-2026 Murilo Gomes <profmugomes.com.br>. All Rights Reserved.
 
 ### Summary
 
