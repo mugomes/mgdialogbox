@@ -1,6 +1,6 @@
 # MGDialogBox
 
-[![License](https://img.shields.io/badge/license-MIT-5351FB)](LICENSE.md)
+[![License](https://img.shields.io/badge/license-MIT-5351FB)](LICENSE)
 
 MGDialogBox é uma biblioteca em Go baseada no **Fyne** que fornece **caixas de diálogo prontas e reutilizáveis** para aplicações desktop, como alertas, confirmações e seleção de arquivos ou diretórios.
 
