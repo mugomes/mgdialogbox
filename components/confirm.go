@@ -1,7 +1,7 @@
-// Required Notice: Copyright (c) 2025-2026 Murilo Gomes <profmugomes.com.br>. All Rights Reserved. (https://profmugomes.com.br)
+// Copyright (C) 2025-2026 Murilo Gomes <profmugomes.com.br>
+// SPDX-License-Identifier: MIT
 
-// Licensed under the PolyForm Perimeter License 1.0.1.
-// See LICENSE.md for details.
+// Site: https://www.profmugomes.com.br
 
 package components
 
@@ -14,7 +14,7 @@ import (
 	"fyne.io/fyne/v2/layout"
 	"fyne.io/fyne/v2/widget"
 
-	"github.com/mugomes/mgsmartflow/v2"
+	"github.com/profmugomes/mgsmartflow/v3"
 )
 
 func NewConfirm(a fyne.App, title, message string, buttons []string, OnResult func(int)) {

@@ -1,7 +1,7 @@
-// Required Notice: Copyright (c) 2025-2026 Murilo Gomes <profmugomes.com.br>. All Rights Reserved. (https://profmugomes.com.br)
+// Copyright (C) 2025-2026 Murilo Gomes <profmugomes.com.br>
+// SPDX-License-Identifier: MIT
 
-// Licensed under the PolyForm Perimeter License 1.0.1.
-// See LICENSE.md for details.
+// Site: https://www.profmugomes.com.br
 
 package controls
 

@@ -1,13 +1,13 @@
-// Required Notice: Copyright (c) 2025-2026 Murilo Gomes <profmugomes.com.br>. All Rights Reserved. (https://profmugomes.com.br)
+// Copyright (C) 2025-2026 Murilo Gomes <profmugomes.com.br>
+// SPDX-License-Identifier: MIT
 
-// Licensed under the PolyForm Perimeter License 1.0.1.
-// See LICENSE.md for details.
+// Site: https://www.profmugomes.com.br
 
 package mgdialogbox
 
 import (
 	"fyne.io/fyne/v2"
-	"github.com/mugomes/mgdialogbox/v2/components"
+	"github.com/profmugomes/mgdialogbox/v3/components"
 )
 
 func NewAlert(a fyne.App, title string, message string, typeError bool, buttonOk string, onClosed func()) {
