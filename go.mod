@@ -1,11 +1,11 @@
-module github.com/mugomes/mgdialogbox/v2
+module github.com/profmugomes/mgdialogbox/v3
 
 go 1.27.2
 
 require (
 	fyne.io/fyne/v2 v2.8.2
-	github.com/mugomes/mgsettings/v4 v4.0.1
-	github.com/mugomes/mgsmartflow/v2 v2.0.1
+	github.com/profmugomes/mgsettings/v5 v5.0.0
+	github.com/profmugomes/mgsmartflow/v3 v3.0.0
 )
 
 require (
